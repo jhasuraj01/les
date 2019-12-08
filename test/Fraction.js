@@ -48,6 +48,10 @@ class Fraction {
         const divisor = gcd([this.numerator, this.denominator]);
         this.numerator /= divisor;
         this.denominator /= divisor;
+        if (this.denominator < 0) {
+            this.numerator *= -1;
+            this.denominator *= -1;
+        }
         return this;
     }
     value() {
@@ -57,5 +61,8 @@ class Fraction {
         this.simplest();
         frac.simplest();
         return (this.numerator === frac.numerator && this.denominator === frac.denominator)
+    }
+    string() {
+        return this.value() % 1 !== 0 ? this.numerator.toString()+"/"+this.denominator.toString() : this.value().toString();
     }
 }

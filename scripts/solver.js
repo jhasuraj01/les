@@ -72,7 +72,7 @@ let evaluate = () => {
         return false;
     }
     let inverseOfCoefficientMatrix = matrixWithVariableSeperated[0].inverse();
-    
+
     let product = inverseOfCoefficientMatrix.multiply(matrixWithVariableSeperated[2]);
     if (product === undefined) {
         //this may be undefined if matrixProduct() returns undefined;
@@ -81,8 +81,12 @@ let evaluate = () => {
     }
     output.innerHTML = '';
     for (let row = 0, col = 0; row < product.value.length; row++) {
-        output.insertAdjacentHTML('beforeend', `<output>${matrixWithVariableSeperated[1].value[row][col]} = ${product.value[row][col].value()}</output>`);
-        firstInputContainer.innerHTML += `<output>${matrixWithVariableSeperated[1].value[row][col]} = ${product.value[row][col].value()}</output>`;
+        let var_ = matrixWithVariableSeperated[1].value[row][col];
+
+        let val = product.value[row][col].string();
+
+        output.insertAdjacentHTML('beforeend', `<output>${var_} = ${val}</output>`);
+        firstInputContainer.innerHTML += `<output>${var_} = ${val}</output>`;
     }
     return true;
 }

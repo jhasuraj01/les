@@ -1,119 +1,123 @@
-// calculate determinant
-let det = (matrixArr) => {
-    let order = matrixArr.length;
-    if (order > 1) {
-        let row = 0;
-        let value = 0;
-        for (let col = 0; col < order; col++) {
-            value += matrixArr[row][col] * Math.pow(-1, col + row) * det(cofactor(matrixArr, row, col));
-        }
-        return value;
-    } else if (order == 1) {
-        return matrixArr[0][0];
-    } else if (order < 1) {
-        return null;
+class Matrix {
+    constructor(equationsArr) {
+        this.value = equationsArr.map(row => {
+            row = row.map(elm => {
+                if (typeof elm === 'number') return new Fraction(elm)
+                else return elm;
+            })
+            return row;
+        })
+        this.height = this.value.length;
+        this.width = this.value[0].length;
     }
-};
+    multiply(matrix) {
+        if (matrix === undefined) return undefined;
 
-// to create a matrix leaving 1 row and 1 col which is been passed
-let cofactor = (smallMatrixArr, row, col) => {
-    let order = smallMatrixArr.length;
-    if (order === 1) { return smallMatrixArr; }
-    let newMatrix = [];
-    for (let sRow = 0; sRow < order; sRow++) {
-        if (row === sRow) {
-            continue;
+        if (this.width === matrix.height) {
+            let newMatrix_arr = [];
+            for (let i = 0; i < this.height; i++) {
+                let tempRow = [];
+                for (let k = 0; k < matrix.width; k++) {
+                    let tempElem = new Fraction(0);
+                    for (let j = 0; j < this.width; j++) {
+                        tempElem = tempElem.add(this.value[i][j].multiply(matrix.value[j][k]));
+                    }
+                    tempRow.push(tempElem);
+                }
+                newMatrix_arr.push(tempRow);
+            }
+            return new Matrix(newMatrix_arr);
         } else {
-            let tempRow = [];
-            for (let sCol = 0; sCol < order; sCol++) {
-                if (col === sCol) {
-                    continue;
-                } else {
-                    tempRow.push(smallMatrixArr[sRow][sCol]);
+            return undefined;
+        }
+    }
+
+    // to create a matrix leaving 1 row and 1 col which is been passed
+    cofactor(row, col) {
+        if (this.height === 1 || this.width === 1) { return this; }
+        let newMatrix_arr = [];
+        for (let row_num = 0; row_num < this.height; row_num++) {
+            if (row === row_num) {
+                continue;
+            } else {
+                let tempRow = [];
+                for (let col_num = 0; col_num < this.width; col_num++) {
+                    if (col === col_num) {
+                        continue;
+                    } else {
+                        tempRow.push(this.value[row_num][col_num]);
+                    }
                 }
+                newMatrix_arr.push(tempRow);
             }
-            newMatrix.push(tempRow);
         }
+        return (new Matrix(newMatrix_arr).det().multiply(Math.pow(-1, col + row)));
     }
-    return newMatrix;
-};
 
-let transpose = (matrixArr) => {
-    const height = matrixArr.length;
-    const width = matrixArr[0].length;
-    let newMatrix = [];
-    for (let row = 0; row < width; row++) {
-        let tempRow = [];
-        for (let col = 0; col < height; col++) {
-            tempRow.push(matrixArr[col][row]);
+    transpose() {
+        let newMatrix_arr = [];
+        for (let row = 0; row < this.width; row++) {
+            let tempRow = [];
+            for (let col = 0; col < this.height; col++) {
+                tempRow.push(this.value[col][row]);
+            }
+            newMatrix_arr.push(tempRow);
         }
-        newMatrix.push(tempRow);
+        return new Matrix(newMatrix_arr);
     }
-    return newMatrix;
-};
-
-let adjoint = (matrixArr) => {
-    const height = matrixArr.length;
-    const width = matrixArr[0].length;
-    // if the matrix has only one element than its adjoint is always unity matrix;
-    if (height === 1 && width === 1) {
-        return [[1]];
-    }
-    let newMatrix = [];
-    for (let row = 0; row < height; row++) {
-        let tempRow = [];
-        for (let col = 0; col < width; col++) {
-            tempRow.push(det(cofactor(matrixArr, row, col)) * Math.pow(-1, col + row));
+    
+    adjoint() {
+        // if the matrix has only one element than its adjoint is always unity matrix;
+        if (this.height === 1 && this.width === 1) {
+            return new Matrix([[1]]);
         }
-        newMatrix.push(tempRow);
-    }
-
-    return transpose(newMatrix);
-};
-
-let inverse = (matrixArr) => {
-    for (let index = 0; index < matrixArr.length; index++) {
-        if (!matrixArr[index].length) return undefined;
-    }
-    let determinantValue = det(matrixArr);
-    if (determinantValue === 0) {
-        return null;
-    }
-    let newMatrix = [];
-    newMatrix = adjoint(matrixArr);
-    const height = newMatrix.length;
-    const width = newMatrix[0].length;
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            newMatrix[row][col] = newMatrix[row][col] / determinantValue;
-        }
-    }
-    return newMatrix;
-};
-
-let matrixProduct = (matrix1, matrix2) => {
-    if (matrix1 === undefined || matrix2 === undefined) return undefined;
-    const matrix1Height = matrix1.length;
-    const matrix1Width = matrix1[0].length;
-    const matrix2Height = matrix2.length;
-    const matrix2Width = matrix2[0].length;
-
-    if (matrix1Width === matrix2Height) {
         let newMatrix = [];
-        for (let i = 0; i < matrix1Height; i++) {
+        for (let row = 0; row < this.height; row++) {
             let tempRow = [];
-            for (let k = 0; k < matrix2Width; k++) {
-                let tempElem = 0;
-                for (let j = 0; j < matrix1Width; j++) {
-                    tempElem += matrix1[i][j] * matrix2[j][k];
-                }
-                tempRow.push(tempElem);
+            for (let col = 0; col < this.width; col++) {
+                tempRow.push(this.cofactor(row, col));
             }
             newMatrix.push(tempRow);
+        }
+        return (new Matrix(newMatrix)).transpose();
+    }
+
+    inverse() {
+        // for (let index = 0; index < matrixArr.length; index++) {
+        //     if (!this.value[index].length) return undefined;
+        // }
+
+        const determinant = this.det();
+        if (determinant.value() === 0) return null;
+
+        let newMatrix = this.adjoint();
+        for (let row = 0; row < this.height; row++) {
+            for (let col = 0; col < this.width; col++) {
+                newMatrix.value[row][col] = newMatrix.value[row][col].divide(determinant);
+            }
         }
         return newMatrix;
-    } else {
-        return undefined;
     }
 
-};
+    // @return fraction object
+    // @input matrix object
+    det = () => {
+        if (this.value.length === this.value[0].length) {
+            const order = this.value.length;
+            if (order > 1) {
+                let row = 0;
+                let value = new Fraction(0);
+                for (let col = 0; col < order; col++) {
+                    value = value.add(this.value[row][col].multiply(this.cofactor(row, col)));
+                }
+                return value;
+            } else if (order == 1) {
+                return this.value[0][0];
+            } else if (order < 1) {
+                return null;
+            }
+        } else {
+            return undefined;
+        }
+    }
+}

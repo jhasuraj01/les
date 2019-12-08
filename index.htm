@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LINEAR EQUATION SOLVER v3.4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./stylesheets/default.css">
+    <link rel="stylesheet" href="./stylesheets/linearEquationSolver.css">
+    <link rel="stylesheet" href="./stylesheets/hambergerMenuBtn.css">
+</head>
+
+<body>
+    <header id="body-header">
+        <label id="sidebar-btn" class="hamberger-menu-btn menu-symbol" for="sidebar-btn-checkBox">
+            <input type="checkbox" name="sidebar-btn-checkBox" id="sidebar-btn-checkBox" style="display: none;">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </label>
+        <h1>LINEAR EQUATION SOLVER</h1>
+    </header>
+    <main>
+
+        <button id="giveExampleBtn">SEE EXAMPLE</button>
+        <label for="noOfEqnInputBox" id="label-noOfEqnInputBox">
+            No. of variables:
+            <input type="number" id="noOfEqnInputBox" value="2">
+        </label>
+
+        <fieldset id="inputContainer">
+            <legend class="inputContainer-header">EQUATION</legend>
+            <label for="equationInputBox">
+                <input type="text" class="l equationInputBox">
+                <input type="text" class="l equationInputBox">
+            </label>
+        </fieldset>
+        <button id="goToEvaluateBtn">click</button>
+        <fieldset id="outputContainer">
+            <legend class="outputContainer-header">ANSWER</legend>
+            <section id="output"></section>
+        </fieldset>
+
+    </main>
+    <aside id="historyContainer">
+        <header>
+            <h2>HISTORY</h2>
+        </header>
+    </aside>
+
+    <!-- The popup Window -->
+    <input type="checkbox" id="showpopupWindowCheckbox" style="display: none;">
+    <article id="popupWindow" class="popupWindow">
+        <!-- popupWindow content -->
+        <div class="popupWindow-content">
+            <header class="popupWindow-header">
+                <h3>Header</h3>
+            </header>
+            <article class="popupWindow-body">
+                <p>Some text in the Body</p>
+                <p>Some other text...</p>
+            </article>
+            <footer class="popupWindow-footer">
+                <h4>Footer</h4>
+            </footer>
+        </div>
+    </article>
+    <footer id="body-footer">
+        <center>&copy; 2019-&infin; Suraj, All rights reserved. </center>
+    </footer>
+    <script>
+        let giveExampleBtn = document.getElementById('giveExampleBtn');
+        let noOfEqnInputBox = document.getElementById('noOfEqnInputBox');
+        let menuSymbol = document.getElementById('sidebar-btn-checkBox');
+        let goToEvaluateBtn = document.getElementById('goToEvaluateBtn');
+        let output = document.getElementById('output');
+        let historyContainer = document.getElementById('historyContainer');
+        let historyContainerHeader = document.querySelector('#historyContainer header');
+        let mainHeader = document.getElementById('body-header');
+        let showpopupWindowCheckbox = document.getElementById('showpopupWindowCheckbox');
+    </script>
+    <script src="./scripts/style.js"></script>
+    <script src="./scripts/matrix.js"></script>
+    <script src="./scripts/gcd.js"></script>
+    <script src="./scripts/newEquationObject.js"></script>
+    <script src="./scripts/solver.js"></script>
+    <script src="./scripts/zeroDetErr.js"></script>
+    <script src="./scripts/popUpWindow.js"></script>
+    <script src="./scripts/showEx.js"></script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ let gcd = (array = []) => {
     let noOfTensToMultiply = 1;
     array.forEach(elm => {
         let tempElm = `${elm}`.match(/(?:[.]).*/g);
-        if (tempElm && tempElm < noOfTensToMultiply) {
+        if (tempElm && tempElm.length < noOfTensToMultiply) {
             noOfTensToMultiply = Math.pow(10, tempElm.length);
         }
     });
@@ -28,10 +28,10 @@ let gcd = (array = []) => {
         return divisor;
     };
 
-    let result = array[0];
+    let result = array[0] || 1; // avoid return '0' as a gcd
     if (array.length === 1) return result;
     for (let index = 1; index < array.length; index++) {
         result = gcdOfTwoNumber(result, array[index]);
     }
-    return result / noOfTensToMultiply;
+    return Math.abs(result / noOfTensToMultiply);
 };

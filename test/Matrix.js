@@ -3,7 +3,7 @@ class Matrix {
         this.value = equationsArr.map(row => {
             row = row.map(elm => {
                 if (typeof elm === 'number') return new Fraction(elm)
-                else if (elm instanceof Fraction) return elm;
+                else return elm;
             })
             return row;
         })
@@ -11,7 +11,7 @@ class Matrix {
         this.width = this.value[0].length;
     }
     multiply(matrix) {
-        if (matrix2 === undefined) return undefined;
+        if (matrix === undefined) return undefined;
 
         if (this.width === matrix.height) {
             let newMatrix_arr = [];
@@ -20,7 +20,7 @@ class Matrix {
                 for (let k = 0; k < matrix.width; k++) {
                     let tempElem = new Fraction(0);
                     for (let j = 0; j < this.width; j++) {
-                        tempElem = tempElem.add(this.value[i][j].multiply(matrix2.value[j][k]));
+                        tempElem = tempElem.add(this.value[i][j].multiply(matrix.value[j][k]));
                     }
                     tempRow.push(tempElem);
                 }

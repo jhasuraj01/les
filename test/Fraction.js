@@ -50,7 +50,12 @@ class Fraction {
         this.denominator /= divisor;
         return this;
     }
-    value () {
+    value() {
         return this.numerator/this.denominator;
+    }
+    isEqual(frac) {
+        this.simplest();
+        frac.simplest();
+        return (this.numerator === frac.numerator && this.denominator === frac.denominator)
     }
 }

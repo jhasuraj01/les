@@ -102,14 +102,13 @@ let createMatrix = (equationsArr) => {
         // Object.getOwnPropertyNames(eqn_obj).filter(variable => referenceObjArr.indexOf(variable) === -1) --> it will return all the new variable which is not present in reference variable;
         referenceObjArr = Object.getOwnPropertyNames(eqn_obj).filter(variable => referenceObjArr.indexOf(variable) === -1).concat(referenceObjArr);
     });
-    let noOfVariable = referenceObjArr.splice(referenceObjArr.indexOf('constant'), 1).length;
-
+    let noOfVariable = referenceObjArr.indexOf('constant') === -1 ? referenceObjArr.length : referenceObjArr.length-1;
     if (noOfVariable > equationsArr.length) {
         Showpopup([
             "ERROR Detected",
             "No. of Equation is less than no. of variable",
-            "Your Input contains" + (noOfVariable - equationsArr.length) + "extra variable than expected",
-            "Enter" + (noOfVariable - equationsArr.length) + "more equation to get the Unique Solution"
+            "Your Input contains " + (noOfVariable - equationsArr.length) + " extra variable than expected",
+            "Enter " + (noOfVariable - equationsArr.length) + " more equation to get the Unique Solution"
         ]);
         return false;
     }

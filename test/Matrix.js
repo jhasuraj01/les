@@ -45,13 +45,13 @@ class Matrix {
                     if (col === col_num) {
                         continue;
                     } else {
-                        tempRow.push(this.value[row_num][col_num].multiply(Math.pow(-1, col + row)));
+                        tempRow.push(this.value[row_num][col_num]);
                     }
                 }
                 newMatrix_arr.push(tempRow);
             }
         }
-        return (new Matrix(newMatrix_arr));
+        return (new Matrix(newMatrix_arr).det().multiply(Math.pow(-1, col + row)));
     }
 
     transpose() {
@@ -75,7 +75,7 @@ class Matrix {
         for (let row = 0; row < this.height; row++) {
             let tempRow = [];
             for (let col = 0; col < this.width; col++) {
-                tempRow.push(this.cofactor(row, col).det());
+                tempRow.push(this.cofactor(row, col));
             }
             newMatrix.push(tempRow);
         }
@@ -108,7 +108,7 @@ class Matrix {
                 let row = 0;
                 let value = new Fraction(0);
                 for (let col = 0; col < order; col++) {
-                    value = value.add(this.value[row][col].multiply(this.cofactor(row, col).det()));
+                    value = value.add(this.value[row][col].multiply(this.cofactor(row, col)));
                 }
                 return value;
             } else if (order == 1) {

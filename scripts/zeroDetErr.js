@@ -33,8 +33,8 @@ let detectDeterminantZeroError = (matrixWithVariableSeperated) => {
         for (let i = ref1_row_index + 1; i < coeffiecientMatrix.height; i++) {
             ref2_row = coeffiecientMatrix.value[i];
             let noOfCoeffEqual = 0;
-            ref1_row.forEach((elm, ref1_row_index) => {
-                if (elm.isEqual(ref1_row[ref1_row_index])) {
+            ref1_row.forEach((elm, cell_index) => {
+                if (elm.isEqual(ref2_row[cell_index])) {
                     noOfCoeffEqual++;
                 }
             })
@@ -74,7 +74,8 @@ let detectDeterminantZeroError = (matrixWithVariableSeperated) => {
         Showpopup([
             "ERROR",
             "Some Unexpected Error has occured!",
-            "Please Report this to me",
+            "The system of equation may have no solution or infinite Solution",
+            "Please send these equations to me",
             "Enter another Equations to get the Unique Solution"
         ]);
     }

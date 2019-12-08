@@ -28,10 +28,11 @@ let gcd = (array = []) => {
         return divisor;
     };
 
-    let result = array[0] || 1; // avoid return '0' as a gcd
+    let result = array[0];
     if (array.length === 1) return result;
     for (let index = 1; index < array.length; index++) {
         result = gcdOfTwoNumber(result, array[index]);
     }
-    return Math.abs(result / noOfTensToMultiply);
+    // avoid return '0' as a gcd
+    return Math.abs(result / noOfTensToMultiply) || 1;
 };

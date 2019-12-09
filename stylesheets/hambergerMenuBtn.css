@@ -13,7 +13,7 @@
     display: block;
     width: var(--hamberger-menu-btn-width);
     height: var(--hamberger-menu-btn-line-height);
-    background-color: #ffffff;
+    background-color: var(--color);
     margin: var(--hamberger-menu-btn-line-vertical-margin) 0;
     border-radius: calc(var(--hamberger-menu-btn-line-height) / 2);
     transition: transform 500ms ease-in-out;

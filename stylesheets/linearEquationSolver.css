@@ -84,7 +84,7 @@ button:focus , input:focus{
     background: white;
     box-shadow:  0 0 5px 2px white;
 }
-.equationInputBox {
+.equationInputBox, #add-input {
     display: block;
     width: 70%;
     min-width: 250px;

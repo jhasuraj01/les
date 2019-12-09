@@ -5,8 +5,7 @@ let add_input_bar = () => {
     console.log(inputs[inputs.length-1]);
     inputs[inputs.length-1].addEventListener('input', coOperateWithUser);
 }
-let coOperateWithUser = () => {
-    output.innerHTML = '';
+let reset_data = () => {
     let inputBox = document.querySelectorAll('.equation_in');
     variables_arr = [];
     inputBox.forEach(input => {
@@ -15,24 +14,13 @@ let coOperateWithUser = () => {
                                 .concat(variables_arr);
     })
     noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length-1;
-    if (noOfVariable > inputBox.length) {
-        add_input_bar();
-    } else if (noOfVariable < inputBox.length) {
-        for (let index = inputBox.length - 1; index > 0; index--) {
-            const input = inputBox[index];
-            if(input.value === '') {
-                input.remove();
-                break;
-            }
-        }
-    }
 }
 
 let evaluate = () => {
-    coOperateWithUser();
+    reset_data();
     let equationsArr = [];
     let stop = false;
-    let inputBox = document.querySelectorAll('#inputContainer input');
+    let inputBox = document.querySelectorAll('.equation_in');
     historyContainerHeader.insertAdjacentHTML('afterend', '<section class="aside-inputContainer"></section>');
     let firstInputContainer = document.querySelector('#historyContainer .aside-inputContainer');
     let emptyInputBox = false;
@@ -97,7 +85,7 @@ let evaluate = () => {
 
         let val = product.value[row][col].string();
 
-        output.insertAdjacentHTML('beforeend', `<output>${var_} = ${val}</output>`);
+        output.insertAdjacentHTML('beforeend', `<output class="output-results">${var_} = ${val}</output>`);
         firstInputContainer.innerHTML += `<output>${var_} = ${val}</output>`;
     }
     return true;
@@ -152,8 +140,4 @@ goToEvaluateBtn.addEventListener('click', evaluate);
 
 menuSymbol.addEventListener('click', () => {
     historyContainer.classList.toggle('translate0');
-});
-
-document.querySelectorAll('.equation_in').forEach(input => {
-    input.addEventListener('input', coOperateWithUser);
 });

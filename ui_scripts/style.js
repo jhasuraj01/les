@@ -16,8 +16,9 @@ add_input_btn.addEventListener('click', add_new_input);
 add_new_input();
 
 let set_layout = () => {
-    output.style.height = `calc(100vh - ${document.getElementById('body-header').offsetHeight}px - 2em)`;
-    outputContainer.style.height = `calc(100vh - ${document.getElementById('body-header').offsetHeight}px)`;
+    console.log(window.height)
+    output.style.height = `calc(${window.innerHeight - document.getElementById('body-header').offsetHeight}px - 2em)`;
+    outputContainer.style.height = `${window.innerHeight - document.getElementById('body-header').offsetHeight}px`;
 }
 window.addEventListener('resize', set_layout);
 set_layout();
@@ -30,7 +31,13 @@ display_output_btn.addEventListener('click', display_output_btn_fn);
 
 outputContainer.addEventListener('click', (event) => {
     if (event.target === outputContainer) {
-        display_output_btn.checked = false;
         output.classList.remove('bringUP');
+        output.classList.add('bringDown');
+        outputContainer.classList.add('hide');
+        setTimeout(() => {
+            output.classList.remove('bringDown');
+            outputContainer.classList.remove('hide');
+            display_output_btn.checked = false;
+        }, 200);
     }
 })

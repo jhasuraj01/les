@@ -1,26 +1,25 @@
 #main {
-    margin: 1em 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-    align-content: stretch;
-    /* outline: 1px solid red; */
+    width: 100%;
+    margin: 1em auto;
+    max-width: 45em;
 }
 
 #inputContainer {
-    flex: 1 1 70%;
+    display: block;
+    width: 95%;
     max-width: 40em;
-    margin: 0.5em;
     min-width: 7em;
+    margin: 2em auto;
 }
-#outputContainer {
-    flex: 1 1 25%;
-    max-width: 20em;
-    margin: 0.5em;
-    min-width: 7em;
+@media (min-width: 50em) {
+    #main {
+        max-width: 50em;
+    }
+    
+    #inputContainer {
+        max-width: 50em;
+    }
 }
-
 /**********************************************
     Equation Input
  ***********************************************/
@@ -51,14 +50,21 @@
     height: 1em;
 }
 .equation_in, #add-input {
+    box-sizing: border-box;
     flex: 1 1 auto;
     min-width: 0;
     border: none;
     background: none;
     text-align: left;
-    padding: 0.3em;
+    padding: 0.5em;
     border-bottom: 0.1em solid gray;
     cursor: pointer;
+    font-size: large;
+}
+@media (min-width: 50em) {
+    .equation_in, #add-input {
+        padding: 0.5em;
+    }
 }
 #add-input {
     color: gray;
@@ -89,11 +95,12 @@
     Output
  ***********************************************/
 #goToEvaluateBtn {
+    box-sizing: border-box;
     display: block;
-    width: 100%;
+    width: 90%;
     min-width: 0;
-    max-width: 10em;
-    background: none;
+    max-width: 20em;
+    background-color: var(--background-color);
     text-align: center;
     padding: 0.3em;
     border-color: gray;
@@ -103,4 +110,70 @@
 }
 .output-results {
     display: block;
+}
+
+
+/**********************************************
+    output Container
+ ***********************************************/
+#display-output-btn:checked ~ #outputContainer {
+    display: block;
+}
+#outputContainer {
+    position: fixed;
+    display: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background: none;
+    animation: changeBackColor 0.3s ease-in-out forwards;
+}
+@media (max-height: 18em) {
+    #outputContainer {
+        min-height: 100vh;
+    }
+}
+#output {
+    box-sizing: border-box;
+    position: fixed;
+    display: block;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    max-width: 25em;
+    max-height: 70vh;
+    background-color: var(--background-color);
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+    padding: 1em 1em 0 1em;
+    overflow-y: scroll;
+}
+#output .output-results {
+    display: block;
+    margin: 1em;
+    font-size: x-large;
+}
+.bringUP {
+    animation: bringUP 300ms ease-in-out forwards;
+}
+@keyframes bringUP {
+    from {
+        transform: translateX(-50%) translateY(100%);
+    }
+    to {
+        transform: translateX(-50%) translateY(10%);
+    }
+}
+@keyframes changeBackColor {
+    from {
+        background: none;
+        opacity: 0;
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 1;
+    }
 }

@@ -14,7 +14,7 @@ let repositionSideNavBar = () => {
     }
 }
 
-let media_forHeader = window.matchMedia('(min-height: 15em)');
+let media_forHeader = window.matchMedia('(min-height: 18em)');
 
 let handle_Media_forHeader = (media_forHeader) => {
     if (media_forHeader.matches) {

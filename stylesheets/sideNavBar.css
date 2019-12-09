@@ -7,7 +7,7 @@
     display: block;
     top: var(--top);
     height: calc(100vh - var(--top));
-    width: 18em;
+    width: 15em;
     max-width: calc(100vw - 3em);
     margin: 0;
     z-index: 3;
@@ -24,6 +24,9 @@
             backdrop-filter: blur(2em) grayscale(0.5);
             background: none;
         }
+    }
+    #side-navBar {
+        width: 20em;
     }
 }
 

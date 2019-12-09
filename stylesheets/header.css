@@ -8,7 +8,7 @@
     background-color: var(--background-color);
     box-shadow: 0 0 5px 2px rgba(128, 128, 128, 0.5);
 }
-@media (min-height: 15em) {
+@media (min-height: 18em) {
     #body-header {
         position: sticky;
         top: 0;
@@ -25,4 +25,23 @@
     text-align: center;
     padding: 0 0.2em;
     color: var(--color);
+}
+
+.small {
+    font-size: small;
+    color: darkcyan;
+}
+
+@media (max-width: 21em) {
+    #branding-h {
+        text-transform: uppercase;
+        font-size: large;
+    }
+    .small {
+        font-size: x-small;
+    }
+    #sidebar-btn {
+        --hamberger-menu-btn-width: 1.5em;
+        --hamberger-menu-btn-height: 1.125em;
+    }
 }

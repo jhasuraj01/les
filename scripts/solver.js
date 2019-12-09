@@ -62,6 +62,24 @@ let evaluate = () => {
         return false;
     }
 
+    if (noOfVariable > equationsArr.length) {
+        Showpopup([
+            "ERROR Detected",
+            "No. of Equation is less than no. of variable",
+            "Your Input contains " + (noOfVariable - equationsArr.length) + " extra variable than expected",
+            "Enter " + (noOfVariable - equationsArr.length) + " more equation to get the Unique Solution"
+        ]);
+        return false;
+    } else if (noOfVariable < equationsArr.length) {
+        Showpopup([
+            "ERROR Detected",
+            "No. of Equation is more than no. of variable",
+            "Your Input contains " + (equationsArr.length - noOfVariable) + " extra equation than expected",
+            "please delete " + (equationsArr.length - noOfVariable) + " unnecessary equation to get the Unique Solution"
+        ]);
+        return false
+    }
+    
     // createMatrix() returns: array[coeffiecient matxix, variable's matrix, constant's matrix];
     let matrixWithVariableSeperated = createMatrix(equationsArr);
 
@@ -88,6 +106,7 @@ let evaluate = () => {
         output.insertAdjacentHTML('beforeend', `<output class="output-results">${var_} = ${val}</output>`);
         firstInputContainer.innerHTML += `<output>${var_} = ${val}</output>`;
     }
+    display_output_btn.click();
     return true;
 }
 
@@ -97,16 +116,6 @@ accept: an array of equation's object;
 return: array[coeffiecient matrix, variable's matrix, constant's matrix], here each matrix is an instance of Matrix Class
 */
 let createMatrix = (equationsArr) => {
-    if (noOfVariable > equationsArr.length) {
-        Showpopup([
-            "ERROR Detected",
-            "No. of Equation is less than no. of variable",
-            "Your Input contains " + (noOfVariable - equationsArr.length) + " extra variable than expected",
-            "Enter " + (noOfVariable - equationsArr.length) + " more equation to get the Unique Solution"
-        ]);
-        return false;
-    }
-
     let matrix_arr_A = [];
     let matrix_arr_C = [];
     let matrix_arr_X = [];

@@ -24,16 +24,11 @@
     <main>
 
         <button id="giveExampleBtn">SEE EXAMPLE</button>
-        <label for="noOfEqnInputBox" id="label-noOfEqnInputBox">
-            No. of variables:
-            <input type="number" id="noOfEqnInputBox" value="2">
-        </label>
 
         <fieldset id="inputContainer">
             <legend class="inputContainer-header">EQUATION</legend>
             <label for="equationInputBox">
-                <input type="text" class="l equationInputBox">
-                <input type="text" class="l equationInputBox">
+                <input type="text" class="equationInputBox equation_in">
             </label>
         </fieldset>
         <button id="goToEvaluateBtn">click</button>
@@ -71,13 +66,14 @@
     </footer>
     <script>
         let giveExampleBtn = document.getElementById('giveExampleBtn');
-        let noOfEqnInputBox = document.getElementById('noOfEqnInputBox');
         let menuSymbol = document.getElementById('sidebar-btn-checkBox');
         let goToEvaluateBtn = document.getElementById('goToEvaluateBtn');
         let output = document.getElementById('output');
         let historyContainer = document.getElementById('historyContainer');
         let historyContainerHeader = document.querySelector('#historyContainer header');
         let mainHeader = document.getElementById('body-header');
+        let noOfVariable = 0;
+        let variables_arr = [];
         let showpopupWindowCheckbox = document.getElementById('showpopupWindowCheckbox');
     </script>
     <script src="./scripts/style.js"></script>

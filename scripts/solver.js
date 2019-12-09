@@ -1,15 +1,33 @@
-
-let setInputBox = () => {
+let add_input_bar = () => {
+    let element = `<input type="text" class="equationInputBox equation_in">`;
+    inputContainer.insertAdjacentHTML('beforeend', element);
+    let inputs = document.getElementsByClassName('equation_in');
+    console.log(inputs[inputs.length-1]);
+    inputs[inputs.length-1].addEventListener('input', coOperateWithUser);
+}
+let coOperateWithUser = () => {
     output.innerHTML = '';
-    let inputContainer = document.getElementById('inputContainer');
-    inputContainer.innerHTML = '<legend class="inputContainer-header">EQUATION</legend>';
-    for (let index = 0; index < noOfEqnInputBox.value; index++) {
-        let element = `<input type="text" class="${index} equationInputBox">`;
-        inputContainer.insertAdjacentHTML('afterbegin', element);
+    let inputBox = document.querySelectorAll('.equation_in');
+    inputBox.forEach(input => {
+        variables_arr = Object.getOwnPropertyNames(newEquationObject(input.value))
+                                .filter(variable => variables_arr.indexOf(variable) === -1)
+                                .concat(variables_arr);
+    })
+    noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length-1;
+    if (noOfVariable > inputBox.length) {
+        add_input_bar();
+    } else if (noOfVariable < inputBox.length) {
+        for (let index = inputBox.length - 1; index > 0; index--) {
+            const input = inputBox[index];
+            if(input.value === '') {
+                input.remove();
+                break;
+            }
+        }
     }
-};
+}
+
 let evaluate = () => {
-    output.innerHTML = '';
     let equationsArr = [];
     let stop = false;
     let inputBox = document.querySelectorAll('#inputContainer input');
@@ -58,14 +76,6 @@ let evaluate = () => {
     let matrixWithVariableSeperated = createMatrix(equationsArr);
 
     if (!matrixWithVariableSeperated) return false;
-    // if (matrixWithVariableSeperated[0].value.length > matrixWithVariableSeperated[0].value[0].length) {
-    //     Showpopup([
-    //         "ERROR Detected",
-    //         "No. of Equation is more than no. of variable",
-    //         "Enter another system of equation to get the Unique Solution"
-    //     ]);
-    //     return false;
-    // }
 
     if ((matrixWithVariableSeperated[0]).det().value() === 0) {
         detectDeterminantZeroError(matrixWithVariableSeperated);
@@ -97,16 +107,6 @@ accept: an array of equation's object;
 return: array[coeffiecient matrix, variable's matrix, constant's matrix], here each matrix is an instance of Matrix Class
 */
 let createMatrix = (equationsArr) => {
-    let referenceObjArr = [];
-    equationsArr.forEach(eqn_obj => {
-        // condition no. of variables should be less than or equal to the number of Equations;
-        // if equation is homogeneous then the below function will permit if equation has 1 variable more than no of equation.
-        // therefore homogeneous equation will targeted while creating new constant.
-
-        // Object.getOwnPropertyNames(eqn_obj).filter(variable => referenceObjArr.indexOf(variable) === -1) --> it will return all the new variable which is not present in reference variable;
-        referenceObjArr = Object.getOwnPropertyNames(eqn_obj).filter(variable => referenceObjArr.indexOf(variable) === -1).concat(referenceObjArr);
-    });
-    let noOfVariable = referenceObjArr.indexOf('constant') === -1 ? referenceObjArr.length : referenceObjArr.length-1;
     if (noOfVariable > equationsArr.length) {
         Showpopup([
             "ERROR Detected",
@@ -120,7 +120,7 @@ let createMatrix = (equationsArr) => {
     let matrix_arr_A = [];
     let matrix_arr_C = [];
     let matrix_arr_X = [];
-    for (const itr of referenceObjArr) {
+    for (const itr of variables_arr) {
         if (itr !== 'constant') {
             matrix_arr_X.push([`${itr}`]);
         }
@@ -147,9 +147,11 @@ let createMatrix = (equationsArr) => {
 
 
 goToEvaluateBtn.addEventListener('click', evaluate);
-noOfEqnInputBox.addEventListener('input', setInputBox);
 
 menuSymbol.addEventListener('click', () => {
-    // menuSymbol.classList.toggle('cross-symbol');
     historyContainer.classList.toggle('translate0');
+});
+
+document.querySelectorAll('.equation_in').forEach(input => {
+    input.addEventListener('input', coOperateWithUser);
 });

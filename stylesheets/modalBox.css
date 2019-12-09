@@ -46,6 +46,7 @@
 }
 .popupWindow-body {
     padding: 2px 16px;
+    color: black;
 }
 .popupWindow-body p {
     padding: 0;

@@ -2,6 +2,8 @@
     width: 100%;
     margin: 1em auto;
     max-width: 45em;
+    background-color: var(--background-color);
+    color: var(--color);
 }
 
 #inputContainer {
@@ -55,6 +57,7 @@
     min-width: 0;
     border: none;
     background: none;
+    color: var(--color);
     text-align: left;
     padding: 0.5em;
     border-bottom: 0.1em solid gray;
@@ -101,6 +104,7 @@
     min-width: 0;
     max-width: 20em;
     background-color: var(--background-color);
+    color: var(--color);
     text-align: center;
     padding: 0.3em;
     border-color: gray;
@@ -186,13 +190,13 @@
         opacity: 0;
     }
     to {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(128, 128, 128, 0.4);
         opacity: 1;
     }
 }
 @keyframes hide {
     from {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(128, 128, 128, 0.4);
         opacity: 1;
     }
     to {

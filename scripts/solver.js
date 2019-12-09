@@ -14,7 +14,6 @@ let coOperateWithUser = () => {
                                 .filter(variable => variables_arr.indexOf(variable) === -1)
                                 .concat(variables_arr);
     })
-    console.log(variables_arr)
     noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length-1;
     if (noOfVariable > inputBox.length) {
         add_input_bar();
@@ -23,7 +22,6 @@ let coOperateWithUser = () => {
             const input = inputBox[index];
             if(input.value === '') {
                 input.remove();
-                console.log(input)
                 break;
             }
         }
@@ -31,6 +29,7 @@ let coOperateWithUser = () => {
 }
 
 let evaluate = () => {
+    coOperateWithUser();
     let equationsArr = [];
     let stop = false;
     let inputBox = document.querySelectorAll('#inputContainer input');

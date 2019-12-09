@@ -8,11 +8,13 @@ let add_input_bar = () => {
 let coOperateWithUser = () => {
     output.innerHTML = '';
     let inputBox = document.querySelectorAll('.equation_in');
+    variables_arr = [];
     inputBox.forEach(input => {
         variables_arr = Object.getOwnPropertyNames(newEquationObject(input.value))
                                 .filter(variable => variables_arr.indexOf(variable) === -1)
                                 .concat(variables_arr);
     })
+    console.log(variables_arr)
     noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length-1;
     if (noOfVariable > inputBox.length) {
         add_input_bar();
@@ -21,6 +23,7 @@ let coOperateWithUser = () => {
             const input = inputBox[index];
             if(input.value === '') {
                 input.remove();
+                console.log(input)
                 break;
             }
         }

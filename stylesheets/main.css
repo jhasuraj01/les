@@ -148,7 +148,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(100%);
     width: 100%;
-    max-width: 25em;
+    max-width: 33em;
     max-height: 60vh;
     background-color: var(--background-color);
     border-top-left-radius: 2em;

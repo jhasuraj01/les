@@ -46,7 +46,7 @@ button:active, button:focus, button, label:active, label:focus, label {
 @media (prefers-color-scheme: dark) {
     body {
         --background-color: #000;
-        --color: white;
+        --color: #ebebeb;
         --big-box-shadow: rgba(255, 0, 0, 0.2);
     }
 }

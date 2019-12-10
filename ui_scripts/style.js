@@ -16,19 +16,34 @@ add_input_btn.addEventListener('click', add_new_input);
 add_new_input();
 
 let set_layout = () => {
-    console.log(window.height)
     output.style.height = `calc(${window.innerHeight - document.getElementById('body-header').offsetHeight}px - 2em)`;
     outputContainer.style.height = `${window.innerHeight - document.getElementById('body-header').offsetHeight}px`;
+    loader_container.style.height = `${window.innerHeight - document.getElementById('body-header').offsetHeight}px`;
     document.body.style.minHeight = window.innerHeight + 'px';
 }
 window.addEventListener('resize', set_layout);
 set_layout();
 
-let display_output_btn_fn = () => {
+let display_output_fn = () => {
+    hide_loader_fn();
+    console.log('display output called');
     output.classList.add('bringUP');
 }
-
-display_output_btn.addEventListener('click', display_output_btn_fn);
+let display_loader_fn = () => {
+    // display_loader_btn.checked = true;
+    loader_container.style.display = 'flex';
+    loader_container.classList.add('show');
+}
+let hide_loader_fn = () => {
+    loader_container.classList.add('hide');
+    loader_container.classList.remove('show');
+    setTimeout(() => {
+        loader_container.classList.remove('hide');
+        loader_container.style.display = 'none';
+    }, 300);
+}
+display_output_btn.addEventListener('click', display_output_fn);
+display_loader_btn.addEventListener('click', display_loader_fn);
 
 outputContainer.addEventListener('click', (event) => {
     if (event.target === outputContainer) {

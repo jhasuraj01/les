@@ -2,18 +2,18 @@ let add_input_bar = () => {
     let element = `<input type="text" class="equationInputBox equation_in">`;
     inputContainer.insertAdjacentHTML('beforeend', element);
     let inputs = document.getElementsByClassName('equation_in');
-    console.log(inputs[inputs.length-1]);
-    inputs[inputs.length-1].addEventListener('input', coOperateWithUser);
+    console.log(inputs[inputs.length - 1]);
+    inputs[inputs.length - 1].addEventListener('input', coOperateWithUser);
 }
 let reset_data = () => {
     let inputBox = document.querySelectorAll('.equation_in');
     variables_arr = [];
     inputBox.forEach(input => {
         variables_arr = Object.getOwnPropertyNames(newEquationObject(input.value))
-                                .filter(variable => variables_arr.indexOf(variable) === -1)
-                                .concat(variables_arr);
+            .filter(variable => variables_arr.indexOf(variable) === -1)
+            .concat(variables_arr);
     })
-    noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length-1;
+    noOfVariable = variables_arr.indexOf('constant') === -1 ? variables_arr.length : variables_arr.length - 1;
 }
 
 let evaluate = () => {
@@ -79,35 +79,73 @@ let evaluate = () => {
         ]);
         return false
     }
-    
-    // createMatrix() returns: array[coeffiecient matxix, variable's matrix, constant's matrix];
-    let matrixWithVariableSeperated = createMatrix(equationsArr);
 
-    if (!matrixWithVariableSeperated) return false;
 
-    if ((matrixWithVariableSeperated[0]).det().value() === 0) {
-        detectDeterminantZeroError(matrixWithVariableSeperated);
-        return false;
-    }
-    let inverseOfCoefficientMatrix = matrixWithVariableSeperated[0].inverse();
 
-    let product = inverseOfCoefficientMatrix.multiply(matrixWithVariableSeperated[2]);
-    if (product === undefined) {
-        //this may be undefined if matrixProduct() returns undefined;
-        console.error('product is undefined');
-        return false;
-    }
     output.innerHTML = '';
-    for (let row = 0, col = 0; row < product.value.length; row++) {
-        let var_ = matrixWithVariableSeperated[1].value[row][col];
 
-        let val = product.value[row][col].string();
 
-        output.insertAdjacentHTML('beforeend', `<output class="output-results">${var_} = ${val}</output>`);
-        firstInputContainer.innerHTML += `<output>${var_} = ${val}</output>`;
+    if ("Worker" in window) {
+        console.log("Worker is supported here, solving matrix in worker");
+
+        let matrixSolverWorker = new Worker('./scripts/matrixSolverWorker.js');
+        // console.log('main: ', {equationArr: equationsArr, variables_arr: variables_arr});
+        matrixSolverWorker.postMessage({ equationsArr: equationsArr, variables_arr: variables_arr });
+        let timeout = setTimeout(() => {
+            display_loader_btn.click();
+        }, 200);
+        matrixSolverWorker.onmessage = (msg) => {
+            clearTimeout(timeout); // to avoid displaying loaded for small equations
+            const response = msg.data;
+            if (response.iserror === false) {
+                response.output.forEach(ans => {
+                    output.insertAdjacentHTML('beforeend', `<output class="output-results">${ans}</output>`);
+                    firstInputContainer.innerHTML += `<output>${ans}</output>`;
+                    console.log(ans);
+                })
+                display_output_btn.click();
+                return true;
+            }
+            else {
+                Showpopup(response.error);
+            }
+
+        }
+    } else {
+
+        console.log("Worker is not supported here, solving matrix in main thread");
+
+        // createMatrix() returns: array[coeffiecient matxix, variable's matrix, constant's matrix];
+        let matrixWithVariableSeperated = createMatrix(equationsArr);
+        if (!matrixWithVariableSeperated) return false;
+
+        if ((matrixWithVariableSeperated[0]).det().value() === 0) {
+            const err = detectDeterminantZeroError(matrixWithVariableSeperated);
+            Showpopup(err);
+            return false;
+        }
+
+        let inverseOfCoefficientMatrix = matrixWithVariableSeperated[0].inverse();
+
+        let product = inverseOfCoefficientMatrix.multiply(matrixWithVariableSeperated[2]);
+        if (product === undefined) {
+            //this may be undefined if matrixProduct() returns undefined;
+            console.error('product is undefined');
+            return false;
+        }
+
+        for (let row = 0, col = 0; row < product.value.length; row++) {
+            let var_ = matrixWithVariableSeperated[1].value[row][col];
+
+            let val = product.value[row][col].string();
+
+            output.insertAdjacentHTML('beforeend', `<output class="output-results">${var_} = ${val}</output>`);
+            firstInputContainer.innerHTML += `<output>${var_} = ${val}</output>`;
+        }
+        display_output_btn.click();
+        return true;
     }
-    display_output_btn.click();
-    return true;
+
 }
 
 /*

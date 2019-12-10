@@ -45,11 +45,13 @@
     fill: gray;
     background: none;
     border: none;
+    cursor: pointer;
 }
 .delete_input svg {
     fill: gray;
     width: 1em;
     height: 1em;
+    cursor: pointer;
 }
 .equation_in, #add-input {
     box-sizing: border-box;
@@ -61,7 +63,6 @@
     text-align: left;
     padding: 0.5em;
     border-bottom: 0.1em solid gray;
-    cursor: pointer;
     font-size: large;
 }
 @media (min-width: 50em) {
@@ -72,6 +73,7 @@
 #add-input {
     color: gray;
     opacity: 0.5;
+    cursor: cell;
 }
 .equation_in::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: gray;
@@ -131,7 +133,7 @@
     width: 100%;
     z-index: 1;
     background: none;
-    animation: changeBackColor 0.3s ease-in-out forwards;
+    animation: show 0.3s ease-in-out forwards;
 }
 @media (max-height: 18em) {
     #outputContainer {
@@ -159,6 +161,30 @@
     margin: 1em;
     font-size: x-large;
 }
+
+/**********************************************
+    Loader Container
+ ***********************************************/
+#loader-container {
+    position: fixed;
+    display: none;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    z-index: 1;
+    cursor: progress;
+}
+
+/**********************************************
+    extra classes
+ ***********************************************/
+
 .bringUP {
     animation: bringUP 300ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
@@ -166,7 +192,10 @@
     animation: bringDown 300ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 .hide {
-    animation: hide 300ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    animation: hide 200ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+.show {
+    animation: show 300ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 @keyframes bringDown {
     from {
@@ -184,7 +213,7 @@
         transform: translateX(-50%) translateY(0%);
     }
 }
-@keyframes changeBackColor {
+@keyframes show {
     from {
         background: none;
         opacity: 0;

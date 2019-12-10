@@ -21,7 +21,9 @@ let newEquationObject = (equation) => {
         } else {
             Object.defineProperty(eqnObject, variable, {
                 value: numValue,
-                writable: true
+                writable: true,
+                configurable: true,
+                enumerable: true
             });
         }
         return null;

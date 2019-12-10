@@ -49,35 +49,37 @@ let detectDeterminantZeroError = (matrixWithVariableSeperated) => {
             if (coincident && parallel) break;
         }
     });
+
+    let err_caught = [];
     if (parallel && coincident) {
-        Showpopup([
+        err_caught = [
             "NO SOLUTION EXIST",
             "Parallel curves are detected",
             "Coincident curves are detected",
             "System of Equation is INCONSISTENT",
             "Enter another Equations to get the Unique Solution"
-        ]);
+        ];
     } else if (parallel) {
-        Showpopup([
+        err_caught = [
             "NO SOLUTION EXIST",
             "Parallel curves are detected",
             "System of Equation is INCONSISTENT",
             "Enter another Equations to get the Unique Solution"
-        ]);
+        ];
     } else if (coincident) {
-        Showpopup([
+        err_caught = [
             "INFINITE SOLUTION EXIST",
             "Coincident curves are detected",
             "Enter another Equations to get the Unique Solution"
-        ]);
+        ];
     } else {
-        Showpopup([
+        err_caught = [
             "ERROR",
             "Some Unexpected Error has occured!",
             "The system of equation may have no solution or infinite Solution",
             "Please send these equations to me",
             "Enter another Equations to get the Unique Solution"
-        ]);
+        ];
     }
-    return null;
+    return err_caught;
 };

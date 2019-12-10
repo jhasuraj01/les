@@ -20,10 +20,10 @@
 /* Blur effect will only be used for computer sized screens */
 @media (min-width: 50em) {
     @supports (backdrop-filter: blur(2em)) {
-        #side-navBar {
+        /* #side-navBar {
             backdrop-filter: blur(2em) grayscale(0.5);
             background: none;
-        }
+        } */
     }
     #side-navBar {
         width: 20em;

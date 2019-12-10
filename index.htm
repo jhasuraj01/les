@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./stylesheets/header.css">
     <link rel="stylesheet" href="./stylesheets/footer.css">
     <link rel="stylesheet" href="./stylesheets/modalBox.css">
+    <link rel="stylesheet" href="./stylesheets/circleLoader.css">
 </head>
 
 <body>
@@ -59,19 +60,55 @@
 
     <main id="main">
         <div id="inputContainer">
-            <!-- Below Label will be added via Javascript -->
+            <!-- Below equationInputBox are be added for quick testing Javascript -->
             <!-- <label for="equationInputBox" class="equation_in_label">
-                <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation"  value="3x+2y=7">
+                <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation"  value="y=7">
                 <button class="delete_input">
                     <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
                 </button>
             </label>
             <label for="equationInputBox" class="equation_in_label">
-                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="2x+3y=7">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="2x=7">
                     <button class="delete_input">
                         <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
                     </button>
-                </label> -->
+            </label>
+            <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="p=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label>
+            <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="q=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label> -->
+            <!-- <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="r=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label>
+            <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="t=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label>
+            <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="s=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label>
+            <label for="equationInputBox" class="equation_in_label">
+                    <input type="text" class="equationInputBox equation_in input_num_1" placeholder="Your Equation" value="a=7">
+                    <button class="delete_input">
+                        <svg viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/></svg>
+                    </button>
+            </label> -->
             <label for="add-input" class="equation_in_label">
                 <button id="add-input">Add New Equation</button>
             </label>
@@ -92,8 +129,19 @@
             <h2>HISTORY</h2>
         </header>
     </aside>
-    
 
+    <input type="checkbox" id="display-loader-btn" style="display: none;">
+    <div id="loader-container">
+        <span style="box-sizing: border-box; background-color: var(--background-color);color: var(--color); border-radius: 0.5em; padding: 1em; margin: 0;">
+            <span class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10" />
+                </svg>
+            </span>
+            <p style="display: inline-block;">Solving... Please Wait</p>
+        </span>
+        
+    </div>
 
     <!-- The popup Window -->
     <input type="checkbox" id="showpopupWindowCheckbox" style="display: none;">
@@ -174,7 +222,9 @@
     </footer>
     <script>
         const outputContainer = document.getElementById('outputContainer');
+        const loader_container = document.getElementById('loader-container');
         const display_output_btn = document.getElementById('display-output-btn');
+        const display_loader_btn = document.getElementById('display-loader-btn');
         let giveExampleBtn = document.getElementById('giveExampleBtn');
         let menuSymbol = document.getElementById('sidebar-btn-checkBox');
         let goToEvaluateBtn = document.getElementById('goToEvaluateBtn');

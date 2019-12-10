@@ -9,20 +9,21 @@
 </head>
 
 <body>
-    <h1>Random Equation Generator</h1>
+    <h1 style="text-align: right;">Random Equation Generator</h1>
     <script>
         let variables = 'abcdefghijklmnop';
         let randIn = (min = -20, max = 20) => {
             return min + Math.floor(Math.random() * (max - min));
         }
         let sum = 0;
-        let no_equation = 8;
+        let no_equation = 6;
+        console.log('number of variables: ', no_equation);
         for (let i = 0; i < no_equation; i++) {
             let eqn = '';
             for (let ii = 0; ii < no_equation; ii++) {
                 let num = randIn();
                 if (ii) num = num < 0 ? num : `+${num}`;
-                if (num) eqn += `${num}${variables[ii]}`;
+                if (num != 0) eqn += `${num}${variables[ii]}`;
             }
             eqn += `=${randIn()}`;
             console.log(eqn);

@@ -1,7 +1,6 @@
-importScripts('/scripts/matrix.js', '/scripts/fraction.js', '/scripts/gcd.js', '/scripts/zeroDetErr.js');
+importScripts('../les/scripts/matrix.js', '../les/scripts/fraction.js', '../les/scripts/gcd.js', '../les/scripts/zeroDetErr.js');
 onmessage = (msg) => {
     const response = solve(msg.data);
-
     postMessage(response);
 }
 const solve = (data) => {

@@ -88,7 +88,7 @@ let evaluate = () => {
     if ("Worker" in window) {
         console.log("Worker is supported here, solving matrix in worker");
 
-        let matrixSolverWorker = new Worker('./scripts/matrixSolverWorker.js');
+        let matrixSolverWorker = new Worker('./matrixSolverWorker.js');
         // console.log('main: ', {equationArr: equationsArr, variables_arr: variables_arr});
         matrixSolverWorker.postMessage({ equationsArr: equationsArr, variables_arr: variables_arr });
         let timeout = setTimeout(() => {

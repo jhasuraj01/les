@@ -156,6 +156,10 @@
     padding: 1em 1em 0 1em;
     overflow-y: auto;
 }
+#output::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
 #output .output-results {
     display: block;
     margin: 1em;

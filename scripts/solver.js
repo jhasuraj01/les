@@ -1,3 +1,15 @@
+let worker = {
+    support: false,
+    canUse: true,
+    matrixSolverWorker: {}
+};
+
+if ("Worker" in window && worker.canUse) {
+    console.log("Worker is supported here, matrix will be solved in worker");
+    worker.support = true;
+    worker.matrixSolverWorker = new Worker('./matrixSolverWorker.js');
+}
+
 let add_input_bar = () => {
     let element = `<input type="text" class="equationInputBox equation_in">`;
     inputContainer.insertAdjacentHTML('beforeend', element);
@@ -85,23 +97,21 @@ let evaluate = () => {
     output.innerHTML = '';
 
 
-    if ("Worker" in window) {
-        console.log("Worker is supported here, solving matrix in worker");
+    if (worker.support && worker.canUse) {
+        console.log("Solving matrix in worker");
 
-        let matrixSolverWorker = new Worker('./matrixSolverWorker.js');
         // console.log('main: ', {equationArr: equationsArr, variables_arr: variables_arr});
-        matrixSolverWorker.postMessage({ equationsArr: equationsArr, variables_arr: variables_arr });
+        worker.matrixSolverWorker.postMessage({ equationsArr: equationsArr, variables_arr: variables_arr });
         let timeout = setTimeout(() => {
             display_loader_btn.click();
         }, 200);
-        matrixSolverWorker.onmessage = (msg) => {
+        worker.matrixSolverWorker.onmessage = (msg) => {
             clearTimeout(timeout); // to avoid displaying loaded for small equations
             const response = msg.data;
             if (response.iserror === false) {
                 response.output.forEach(ans => {
                     output.insertAdjacentHTML('beforeend', `<output class="output-results">${ans}</output>`);
                     firstInputContainer.innerHTML += `<output>${ans}</output>`;
-                    console.log(ans);
                 })
                 display_output_btn.click();
                 return true;
@@ -113,7 +123,7 @@ let evaluate = () => {
         }
     } else {
 
-        console.log("Worker is not supported here, solving matrix in main thread");
+        console.log("Solving matrix in main thread, Worker may be disabled or not supported");
 
         // createMatrix() returns: array[coeffiecient matxix, variable's matrix, constant's matrix];
         let matrixWithVariableSeperated = createMatrix(equationsArr);

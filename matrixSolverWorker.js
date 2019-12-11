@@ -1,4 +1,10 @@
-importScripts('../les/scripts/matrix.js', '../les/scripts/fraction.js', '../les/scripts/gcd.js', '../les/scripts/zeroDetErr.js');
+importScripts(
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/matrix.js',
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/fraction.js',
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/gcd.js',
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/zeroDetErr.js'
+);
+
 onmessage = (msg) => {
     const response = solve(msg.data);
     postMessage(response);

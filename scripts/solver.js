@@ -19,6 +19,7 @@ let add_input_bar = () => {
 }
 let reset_data = () => {
     let inputBox = document.querySelectorAll('.equation_in');
+    if (inputBox.length === 0) return false;
     variables_arr = [];
     inputBox.forEach(input => {
         variables_arr = Object.getOwnPropertyNames(newEquationObject(input.value))
@@ -29,7 +30,7 @@ let reset_data = () => {
 }
 
 let evaluate = () => {
-    reset_data();
+    if (reset_data() === false) return;
     let equationsArr = [];
     let stop = false;
     let inputBox = document.querySelectorAll('.equation_in');

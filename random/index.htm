@@ -25,9 +25,10 @@
 <body>
     <h1 style="text-align: center;">Random Equation Generator</h1>
     <label for="no_variable">
-        Number of Variable: <input type="number" name="no_variable" id="no_variable" oninput="giveEquation()" max="26"
+        Number of Variable: <input type="number" name="no_variable" id="no_variable" oninput="giveEquation()" max="52"
             min="1">
     </label>
+    <button onclick="giveEquation()">Refresh</button>
     <div id="output"></div>
     <script>
         let variables = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -45,9 +46,9 @@
                 for (let ii = 0; ii < no_equation; ii++) {
                     let num = randIn();
                     if (ii) num = num < 0 ? num : `+${num}`;
-                    if (num != 0) eqn += `${num}${variables[ii]}`;
+                    if (num != 0) eqn += `${num}${variables[ii]} `;
                 }
-                eqn += `=${randIn()}`;
+                eqn += `= ${randIn()}`;
                 console.log(eqn);
                 output += '<li>' + eqn + '</li>';
             }

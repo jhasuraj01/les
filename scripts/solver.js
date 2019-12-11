@@ -117,6 +117,7 @@ let evaluate = () => {
                 return true;
             }
             else {
+                hide_loader_fn();
                 Showpopup(response.error);
             }
 

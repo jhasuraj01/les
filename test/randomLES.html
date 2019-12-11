@@ -6,27 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        body {
+            font-size: large;
+        }
+
+        li {
+            margin: 0.5em 0 0.5em 0.3em;
+        }
+
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
-    <h1 style="text-align: right;">Random Equation Generator</h1>
+    <h1 style="text-align: center;">Random Equation Generator</h1>
+    <label for="no_variable">
+        Number of Variable: <input type="number" name="no_variable" id="no_variable" oninput="giveEquation()" max="26"
+            min="1">
+    </label>
+    <div id="output"></div>
     <script>
-        let variables = 'abcdefghijklmnop';
+        let variables = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let randIn = (min = -20, max = 20) => {
             return min + Math.floor(Math.random() * (max - min));
         }
-        let sum = 0;
-        let no_equation = 6;
-        console.log('number of variables: ', no_equation);
-        for (let i = 0; i < no_equation; i++) {
-            let eqn = '';
-            for (let ii = 0; ii < no_equation; ii++) {
-                let num = randIn();
-                if (ii) num = num < 0 ? num : `+${num}`;
-                if (num != 0) eqn += `${num}${variables[ii]}`;
+        let giveEquation = () => {
+            let sum = 0;
+            let output = '';
+            let no_equation = document.getElementById('no_variable').value;
+            console.log('number of variables: ', no_equation);
+            output += '<p> number of Equations: ' + no_equation + ' </p><ul>';
+            for (let i = 0; i < no_equation; i++) {
+                let eqn = '';
+                for (let ii = 0; ii < no_equation; ii++) {
+                    let num = randIn();
+                    if (ii) num = num < 0 ? num : `+${num}`;
+                    if (num != 0) eqn += `${num}${variables[ii]}`;
+                }
+                eqn += `=${randIn()}`;
+                console.log(eqn);
+                output += '<li>' + eqn + '</li>';
             }
-            eqn += `=${randIn()}`;
-            console.log(eqn);
+            document.getElementById('output').innerHTML = output + '</ul>';
         }
     </script>
 </body>

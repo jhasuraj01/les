@@ -45,8 +45,10 @@
                 let eqn = '';
                 for (let ii = 0; ii < no_equation; ii++) {
                     let num = randIn();
-                    if (eqn) num = num < 0 ? `- ${-num}` : `+ ${num}`;
-                    if (num != 0) eqn += `${num}${variables[ii]} `;
+                    if (num != 0) {
+                        if (eqn) num = num < 0 ? `- ${-num}` : `+ ${num}`;
+                        eqn += `${num}${variables[ii]} `;
+                    }
                 }
                 eqn += `= ${randIn()}`;
                 console.log(eqn);

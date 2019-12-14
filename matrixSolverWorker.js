@@ -2,7 +2,8 @@ importScripts(
     self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/matrix.js',
     self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/fraction.js',
     self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/gcd.js',
-    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/zeroDetErr.js'
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/zeroDetErr.js',
+    self.location.href.substring(0, self.location.href.lastIndexOf('/')) + '/scripts/gjm.js'
 );
 
 onmessage = (msg) => {
@@ -23,6 +24,7 @@ const solve = (data) => {
         response.error = [
             "Error detected",
             "matrixWithVariableSeperated is undefined, This is unexpected error from mSW.js, Please notify to Suraj",
+            // "Coefficient Matrix may have determinant Value equal to zero",
             "Enter another Equations to get the Unique Solution"
         ];
         console.log(response);
@@ -35,29 +37,31 @@ const solve = (data) => {
         return response;
     }
 
-    let inverseOfCoefficientMatrix = matrixWithVariableSeperated[0].inverse();
+    // let inverseOfCoefficientMatrix = matrixWithVariableSeperated[0].inverse();
 
-    let product = inverseOfCoefficientMatrix.multiply(matrixWithVariableSeperated[2]);
-    if (product === undefined) {
-        //this may be undefined if matrixProduct() returns undefined;
-        console.error('product is undefined');
-        response.iserror = true;
-        response.error = [
-            "Error detected",
-            "product is undefined, This is unexpected error from mSW.js, Please notify to Suraj",
-            "Enter another Equations to get the Unique Solution"
-        ];
-        return response;
-    } else {
-        for (let row = 0, col = 0; row < product.value.length; row++) {
-            let var_ = matrixWithVariableSeperated[1].value[row][col];
+    let convertToDigonalMatrix_system = convertToDigonalMatrix(matrixWithVariableSeperated);
 
-            let val = product.value[row][col].string();
+    // let product = inverseOfCoefficientMatrix.multiply(matrixWithVariableSeperated[2]);
+    // if (product === undefined) {
+    //     //this may be undefined if matrixProduct() returns undefined;
+    //     console.error('product is undefined');
+    //     response.iserror = true;
+    //     response.error = [
+    //         "Error detected",
+    //         "product is undefined, This is unexpected error from mSW.js, Please notify to Suraj",
+    //         "Enter another Equations to get the Unique Solution"
+    //     ];
+    //     return response;
+    // } else {
+        for (let dig = 0; dig < convertToDigonalMatrix_system[0].height; dig++) {
+            let var_ = matrixWithVariableSeperated[1].value[dig][0];
+
+            let val = convertToDigonalMatrix_system[1].value[dig][0].divide(convertToDigonalMatrix_system[0].value[dig][dig]).string();
 
             response.output.push(`${var_} = ${val}`);
         }
         return response;
-    }
+    // }
 }
 
 let createMatrix = ({ equationsArr, variables_arr } = {}) => {

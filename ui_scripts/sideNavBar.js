@@ -33,3 +33,6 @@ media_forHeader.addListener(handle_Media_forHeader); // Attach listener function
 sidebar_btn_checkBox.addEventListener('change', repositionSideNavBar)
 window.addEventListener('orientationchange', repositionSideNavBar);
 repositionSideNavBar();
+window.addEventListener('load', () => {
+    sideNavBar.style.display = 'block';
+});

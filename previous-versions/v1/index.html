@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Merienda|Slabo+27px" rel="stylesheet">
+    <title>Linear Equation solver v1.0</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./main.js" async></script>
+</head>
+
+<body onload="pageLoaded()">
+    <!-- <div id="mySidenav" class="nav navDesign firstNav">
+                <button type="menu" class="line-button first-line-close-button" id="closebtn" onclick="closeNav()">
+                    <hr>
+                    <hr>
+                    <hr>
+                </button>
+                <div style="color:white;">More Program</div>
+                <a href="https://code.sololearn.com/WP49XhVGL77x/#html" class="list-item" target="_blank">Caesar Cipher v1.1</a>
+                <a href="https://code.sololearn.com/W9ZQ7lPkCJJM/#html" class="list-item" target="_blank">Long Adder (web)</a>
+                <a href="https://code.sololearn.com/Wrv1qQvmi77T/#html" class="list-item" target="_blank">Scientific Notation v2.1</a>
+                <a href="https://code.sololearn.com/c8o2npq6MfHq/#cpp" class="list-item" target="_blank">Long Adder (cpp)</a>
+        </div> -->
+
+    <!-- <button type="menu" class="line-button" onclick="openNav()">
+        <hr>
+        <hr>
+        <hr>
+    </button> -->
+    <button onclick="unfixKeypadPosition()" class="unfixKeypadPosition KeypadPosition">unfix Keypad Position</button>
+    <button onclick="fixKeypadPosition()" class="fixKeypadPosition KeypadPosition">fix Keypad Position</button>
+    <center>
+        <div class="section X">X</div>
+        <a href="https://www.sololearn.com/learn/13549/?ref=app">
+            <div>
+                <h2>Linear Equation Solver</h2>
+            </div>
+        </a>
+
+        <div id="output" class="output"> </div>
+        <div>
+            <button onclick="start()" class="Calculate cursorProperty">Calculate</button>
+        </div>
+        <div class="inputKeys">
+            <button onclick="putOperator(2)" class="cursorProperty">-</button>
+            <button onclick="putOperator(3)" class="cursorProperty">+</button>
+            <button onclick="reset()" class="cursorProperty">&#8634;</button>
+            <button onclick="putEqual()" class="cursorProperty">=</button>
+            <button onclick="goBack()" class="cursorProperty">&#10006;</button>
+            <br>
+            <button onclick="putNumber(6)" class="cursorProperty">6</button>
+            <button onclick="putNumber(7)" class="cursorProperty">7</button>
+            <button onclick="putNumber(8)" class="cursorProperty">8</button>
+            <button onclick="putNumber(9)" class="cursorProperty">9</button>
+            <button style="visibility: hidden;">a</button>
+            <br>
+            <button onclick="putNumber(2)" class="cursorProperty">2</button>
+            <button onclick="putNumber(3)" class="cursorProperty">3</button>
+            <button onclick="putNumber(4)" class="cursorProperty">4</button>
+            <button onclick="putNumber(5)" class="cursorProperty">5</button>
+            <button style="visibility: hidden;">b</button>
+            <br>
+            <button onclick="putNumber(10)" class="cursorProperty">.</button>
+            <button onclick="putNumber(0)" class="cursorProperty">0</button>
+            <button onclick="putNumber(1)" class="cursorProperty">1</button>
+            <button onclick="putVariable()" class="cursorProperty">x</button>
+            <button style="visibility: hidden;">c</button>
+            <br>
+
+
+        </div>
+    </center>
+    <div style="height:150px; font-family: monospace; visibility: hidden;"></div>
+    <p style="font-family: monospace;"><strong>Note:-</strong> This code was originally published on <a  style="font-family: monospace; color:yellow;" href="https://code.sololearn.com/WeYvv5R892Bz/#html" target="_blank" rel="noopener noreferrer">sololearn</a>.</p>
+    <footer>
+        <a href="../../"><button id="backVersion">Go To latest Version</button></a>
+    </footer>
+</body>
+
+</html>

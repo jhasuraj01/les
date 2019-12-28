@@ -2,10 +2,18 @@
 <html lang="en">
 
 <head>
+    <meta name="keywords"
+        content="system of linear equations, system of equations, linear equations in two variables, pair of linear equations, linear equations questions, linear equations problems">
+    <meta name="description"
+        content="Use an Online equation Generator tool to solve and practice equations as many as you want. Here you will get the questions to solve system of linear equations in two or multiple variables" />
+    <link rel="canonical" href="https://jhasuraj.com/les/" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Linear Equation Generator App</title>
+    <script data-ad-client="ca-pub-2121921885457668" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <style>
         body {
             font-size: large;
@@ -23,13 +31,20 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">Random Equation Generator</h1>
-    <label for="no_variable">
-        Number of Variable: <input type="number" name="no_variable" id="no_variable" oninput="giveEquation()" max="52"
-            min="1">
-    </label>
-    <button onclick="giveEquation()">Refresh</button>
-    <div id="output"></div>
+    <h1 style="text-align: center;">System of Linear Equation Generator</h1>
+    <main>
+        <div style="margin: auto; text-align: center;">
+            <label for="no_variable" style="text-align: center;">
+                Number of Variable: <input type="number" name="no_variable" id="no_variable" oninput="giveEquation()"
+                    max="52" min="1">
+            </label>
+            <button onclick="giveEquation()">Refresh</button>
+        </div>
+        <div style="text-align: center;">
+            <div id="output" style="display: inline-block; text-align: left;"></div>
+        </div>
+    </main>
+    <h2 style="text-align: center;"><a href="../">System of Linear Equation Solver</a></h2>
     <script>
         let variables = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let randIn = (min = -20, max = 20) => {

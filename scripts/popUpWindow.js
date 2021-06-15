@@ -23,9 +23,38 @@ let Showpopup = (message) => {
     }
     // delay for better user experience
     setTimeout(() => {
-        showpopupWindowCheckbox.checked = true;
+        showpopupWindowCheckbox.click();
     }, 100);
 };
 let popupWindowCloser = () => {
-    document.getElementById('showpopupWindowCheckbox').checked = false;
+    document.getElementById('showpopupWindowCheckbox').click();
 }
+
+let isPopUpOpen = false
+navigationObserver.handle(popupWindow, {
+    toShow: {
+        observableActions: [
+            { element: showpopupWindowCheckbox, action: 'change' }
+        ],
+        callback: () => {
+            if (isPopUpOpen === false) {
+                isPopUpOpen = true
+                showpopupWindowCheckbox.checked = isPopUpOpen
+                return true
+            }
+        }
+    },
+    toHide: {
+        observableActions: [
+            { element: showpopupWindowCheckbox, action: 'change' }
+        ],
+        callback: () => {
+            if (isPopUpOpen === true) {
+                isPopUpOpen = false
+                showpopupWindowCheckbox.checked = isPopUpOpen
+                return true
+            }
+        }
+    },
+    currentState: 'inactive'
+})

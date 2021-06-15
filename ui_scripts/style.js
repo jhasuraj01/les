@@ -26,8 +26,10 @@ set_layout();
 
 let display_output_fn = () => {
     hide_loader_fn();
+    display_output_btn.checked = true;
     console.log('display output called');
     output.classList.add('bringUP');
+    return true
 }
 let display_loader_fn = () => {
     // display_loader_btn.checked = true;
@@ -42,11 +44,14 @@ let hide_loader_fn = () => {
         loader_container.style.display = 'none';
     }, 300);
 }
-display_output_btn.addEventListener('click', display_output_fn);
+// display_output_btn.addEventListener('click', display_output_fn);
 display_loader_btn.addEventListener('click', display_loader_fn);
 
-outputContainer.addEventListener('click', (event) => {
-    if (event.target === outputContainer) {
+// outputContainer.addEventListener('click', (event) => {
+    
+// })
+const hide_output_fn = (event) => {
+    if (event === undefined || event.target === outputContainer) {
         output.classList.remove('bringUP');
         output.classList.add('bringDown');
         outputContainer.classList.add('hide');
@@ -55,5 +60,21 @@ outputContainer.addEventListener('click', (event) => {
             outputContainer.classList.remove('hide');
             display_output_btn.checked = false;
         }, 200);
+        return true
     }
+}
+navigationObserver.handle(outputContainer, {
+    toShow: {
+        observableActions: [
+            { element: display_output_btn, action: 'click' }
+        ],
+        callback: display_output_fn
+    },
+    toHide: {
+        observableActions: [
+            { element: outputContainer, action: 'click' }
+        ],
+        callback: hide_output_fn
+    },
+    currentState: 'inactive'
 })

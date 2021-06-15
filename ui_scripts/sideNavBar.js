@@ -1,8 +1,9 @@
 let sidebar_btn_checkBox = document.getElementById('sidebar-btn-checkBox');
 let sideNavBar = document.getElementById('side-navBar');
 let body_header = document.getElementById('body-header');
+let isNavOpen = false
 let repositionSideNavBar = () => {
-    if (sidebar_btn_checkBox.checked === true) {
+    if (isNavOpen) {
         sideNavBar.style.transform = "translateX(0)";
         if (!media_forHeader.matches) {
             document.getElementById('secondary-menu-close-btn').style.display = "initial";
@@ -36,3 +37,33 @@ repositionSideNavBar();
 window.addEventListener('load', () => {
     sideNavBar.style.display = 'block';
 });
+
+navigationObserver.handle(sideNavBar, {
+    toShow: {
+        observableActions: [
+            { element: sidebar_btn_checkBox, action: 'change' }
+        ],
+        callback: () => {
+            if (isNavOpen === false) {
+                isNavOpen = true
+                repositionSideNavBar()
+                sidebar_btn_checkBox.checked = isNavOpen
+                return true
+            }
+        }
+    },
+    toHide: {
+        observableActions: [
+            { element: sidebar_btn_checkBox, action: 'change' }
+        ],
+        callback: () => {
+            if (isNavOpen === true) {
+                isNavOpen = false
+                repositionSideNavBar()
+                sidebar_btn_checkBox.checked = isNavOpen
+                return true
+            }
+        }
+    },
+    currentState: 'inactive'
+})
